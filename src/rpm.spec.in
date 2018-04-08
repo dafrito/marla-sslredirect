@@ -1,0 +1,30 @@
+Name: @PACKAGE_NAME@
+
+Version:	@PACKAGE_VERSION@
+Release:	@PACKAGE_RELEASE@%{?dist}
+Summary: Redirect non-ssl to ssl on Marla
+
+License:	Apache license 2.0
+URL:		@PACKAGE_URL@
+Source0:	@PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz
+BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+BuildArch:	x86_64
+Requires:   apr-devel
+
+%description
+Module to redirect non-SSL to SSL.
+
+%prep
+%setup -q
+
+%build
+make
+
+%check
+
+%install
+mkdir -p %{buildroot}/%{_libdir}
+cp @PACKAGE_NAME@.so %{buildroot}/%{_libdir}
+
+%files
+%{_libdir}/@PACKAGE_NAME@.so
