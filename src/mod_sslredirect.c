@@ -27,6 +27,14 @@ static marla_WriteResult writeResponse(marla_Request* req, marla_WriteEvent* we)
         }
         return marla_WriteResult_DOWNSTREAM_CHOKED;
     }
+
+    while(marla_Ring_size(req->cxn->output) > 0) {
+        int nflushed;
+        marla_WriteResult wr = marla_Connection_flush(req->cxn, &nflushed);
+        if(wr != marla_WriteResult_CONTINUE) {
+            return wr;
+        }
+    }
     req->writeStage = marla_CLIENT_REQUEST_AFTER_RESPONSE;
     return marla_WriteResult_CONTINUE;
 }

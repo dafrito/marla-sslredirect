@@ -6,8 +6,8 @@ USER=$(shell whoami)
 UID=$(shell id -u `whoami`)
 GID=$(shell id -g `whoami`)
 PACKAGE_NAME=mod_sslredirect
-PACKAGE_VERSION=1.3
-PACKAGE_RELEASE=2
+PACKAGE_VERSION=1.4
+PACKAGE_RELEASE=1
 PACKAGE_URL=rainback.com
 build_cpu=x86_64
 
